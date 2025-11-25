@@ -1,0 +1,11 @@
+{
+  "name": "勿蹉跎 - 专注Todo",
+  "short_name": "勿蹉跎",
+  "description": "轻量级移动端任务管理与番茄钟应用",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#F2F2F7",
+  "theme_color": "#007AFF",
+  "orientation": "portrait",
+  "scope": "./"
+}

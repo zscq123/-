@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="勿蹉跎">
+  <meta name="theme-color" content="#007AFF">
+  <meta name="description" content="轻量级移动端任务管理与番茄钟应用">
+  
+  <title>勿蹉跎 - 专注Todo</title>
+  
+  <!-- PWA Manifest -->
+  <link rel="manifest" href="manifest.json">
+  
+  <!-- Apple Touch Icons -->
+  <link rel="apple-touch-icon" href="assets/icons/icon-192.png">
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/mobile.css">
+  <link rel="stylesheet" href="css/dark.css">
+  <link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+  
+  <!-- 导航栏 -->
+  <nav class="navbar">
+    <h1 class="navbar-title">📝 勿蹉跎</h1>
+    <div class="navbar-actions">
+      <button class="navbar-button" id="pomodoroBtn" aria-label="番茄钟">🍅</button>
+      <button class="navbar-button" id="statsBtn" aria-label="统计">📊</button>
+      <button class="navbar-button" id="settingsBtn" aria-label="设置">⚙️</button>
+    </div>
+  </nav>
+
+  <!-- 主内容区 -->
+  <main class="main-content">
+    
+    <!-- 搜索框 -->
+    <div class="search-container">
+      <input type="text" class="search-input" id="searchInput" placeholder="🔍 搜索任务...">
+    </div>
+
+    <!-- 分类筛选 -->
+    <div class="category-filter">
+      <button class="category-btn active" data-category="all">全部</button>
+      <button class="category-btn" data-category="work">🔵</button>
+      <button class="category-btn" data-category="life">🟢</button>
+      <button class="category-btn" data-category="study">🟡</button>
+      <button class="category-btn" data-category="health">🔴</button>
+    </div>
+
+    <!-- 任务列表 -->
+    <div class="task-list" id="taskList">
+      <!-- 任务卡片将通过JS动态生成 -->
+    </div>
+
+    <!-- 空状态提示 -->
+    <div class="empty-state" id="emptyState" style="display: none;">
+      <div class="empty-icon">📝</div>
+      <p class="empty-text">还没有任务</p>
+      <p class="empty-hint">点击右下角按钮添加新任务</p>
+    </div>
+
+  </main>
+
+  <!-- 底部状态栏 -->
+  <div class="bottom-bar">
+    <div class="stat-item">
+      <span class="stat-icon">🔥</span>
+      <span class="stat-number" id="streakDays">0</span>
+      <span class="stat-label">天</span>
+    </div>
+    <div class="stat-divider">|</div>
+    <div class="stat-item">
+      <span class="stat-label">今日:</span>
+      <span class="stat-number" id="todayComplete">0</span>
+      <span class="stat-label">/</span>
+      <span class="stat-number" id="todayTotal">0</span>
+    </div>
+    <div class="stat-divider">|</div>
+    <div class="stat-item">
+      <span class="stat-icon">🍅</span>
+      <span class="stat-label">×</span>
+      <span class="stat-number" id="todayPomodoro">0</span>
+    </div>
+  </div>
+
+  <!-- FAB 浮动按钮 -->
+  <button class="fab-button" id="fabButton" aria-label="添加任务">
+    ➕
+  </button>
+
+  <!-- 添加任务弹窗 -->
+  <div class="modal-overlay" id="addTaskModal" style="display: none;">
+    <div class="modal-content">
+      <h2 class="modal-title">添加新任务</h2>
+      <div class="modal-divider"></div>
+      
+      <form id="addTaskForm">
+        <div class="form-group">
+          <label class="form-label">任务名称</label>
+          <input type="text" class="input-field" id="taskInput" placeholder="输入任务内容..." required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">选择分类</label>
+          <div class="category-select">
+            <button type="button" class="category-select-btn active" data-category="work">
+              <span class="category-icon">🔵</span>
+              <span class="category-name">工作</span>
+            </button>
+            <button type="button" class="category-select-btn" data-category="life">
+              <span class="category-icon">🟢</span>
+              <span class="category-name">生活</span>
+            </button>
+            <button type="button" class="category-select-btn" data-category="study">
+              <span class="category-icon">🟡</span>
+              <span class="category-name">学习</span>
+            </button>
+            <button type="button" class="category-select-btn" data-category="health">
+              <span class="category-icon">🔴</span>
+              <span class="category-name">健康</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" class="btn-secondary" id="cancelBtn">取消</button>
+          <button type="submit" class="btn-primary">添加</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 番茄钟界面 -->
+  <div class="pomodoro-overlay" id="pomodoroOverlay" style="display: none;">
+    <button class="close-button" id="closePomodoroBtn">✕</button>
+    
+    <div class="pomodoro-content">
+      <h2 class="pomodoro-task" id="pomodoroTaskName">任务名称</h2>
+      
+      <div class="pomodoro-timer" id="pomodoroTimer">25:00</div>
+      
+      <div class="pomodoro-progress">
+        <span class="progress-dot filled">●</span>
+        <span class="progress-dot">○</span>
+        <span class="progress-dot">○</span>
+        <span class="progress-dot">○</span>
+        <span class="progress-dot">○</span>
+        <span class="progress-dot">○</span>
+        <span class="progress-dot">○</span>
+        <span class="progress-dot">○</span>
+      </div>
+
+      <button class="btn-primary pomodoro-btn" id="startPomodoroBtn">开始专注</button>
+      
+      <button class="btn-secondary pomodoro-btn" id="whiteNoiseBtn">选择白噪音</button>
+
+      <div class="pomodoro-stats">
+        <span>今日 🍅×<span id="pomodoroCount">0</span></span>
+        <span>专注 <span id="focusMinutes">0</span>分钟</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast 提示 -->
+  <div class="toast" id="toast" style="display: none;"></div>
+
+  <!-- JavaScript -->
+  <script src="js/storage.js"></script>
+  <script src="js/task.js"></script>
+  <script src="js/pomodoro.js"></script>
+  <script src="js/swipe.js"></script>
+  <script src="js/app.js"></script>
+
+  <!-- Service Worker 注册 -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js')
+          .then(reg => console.log('✅ Service Worker 注册成功'))
+          .catch(err => console.log('❌ Service Worker 注册失败:', err));
+      });
+    }
+  </script>
+
+</body>
+</html>

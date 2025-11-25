@@ -1,0 +1,136 @@
+/* ==========================================
+   移动端优化样式
+   ========================================== */
+
+/* 防止橡皮筋效果 */
+html {
+  overscroll-behavior: none;
+}
+
+body {
+  overscroll-behavior: none;
+  overflow-x: hidden;
+  overflow-y: auto;
+  min-height: 100vh;
+  width: 100%;
+}
+
+/* 触摸优化 */
+button, a, .task-card {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* 最小触摸区域 */
+button {
+  min-width: 44px;
+  min-height: 44px;
+}
+
+/* 小屏幕适配 (< 375px) */
+@media (max-width: 374px) {
+  .navbar-title {
+    font-size: 16px;
+  }
+  
+  .fab-button {
+    width: 48px;
+    height: 48px;
+    font-size: 20px;
+  }
+  
+  .task-title {
+    font-size: 16px;
+  }
+}
+
+/* 大屏幕适配 (> 414px) */
+@media (min-width: 415px) {
+  .modal-content {
+    max-width: 380px;
+  }
+  
+  .pomodoro-content {
+    max-width: 380px;
+  }
+}
+
+/* 平板适配 (> 768px) */
+@media (min-width: 768px) {
+  .main-content {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .navbar,
+  .bottom-bar {
+    max-width: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .fab-button {
+    right: calc(50% - 300px + 20px);
+  }
+  
+  .toast {
+    max-width: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+/* 横屏模式优化 */
+@media (orientation: landscape) and (max-height: 500px) {
+  .pomodoro-timer {
+    font-size: 56px;
+    margin-bottom: var(--space-16);
+  }
+  
+  .pomodoro-task {
+    font-size: 20px;
+    margin-bottom: var(--space-16);
+  }
+  
+  .pomodoro-progress,
+  .pomodoro-stats {
+    margin-top: var(--space-16);
+    margin-bottom: var(--space-16);
+  }
+}
+
+/* Safe Area 适配增强 */
+@supports (padding: max(0px)) {
+  .navbar {
+    padding-left: max(var(--space-16), env(safe-area-inset-left));
+    padding-right: max(var(--space-16), env(safe-area-inset-right));
+  }
+  
+  .search-container,
+  .category-filter,
+  .task-list {
+    padding-left: max(var(--space-16), env(safe-area-inset-left));
+    padding-right: max(var(--space-16), env(safe-area-inset-right));
+  }
+  
+  .fab-button {
+    right: max(20px, env(safe-area-inset-right));
+  }
+}
+
+/* 防止文字放大 */
+input, textarea, select {
+  font-size: 16px !important;
+}
+
+/* iOS 输入框样式重置 */
+input[type="text"],
+input[type="search"] {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+/* 禁用输入框阴影 */
+input:focus,
+textarea:focus {
+  -webkit-appearance: none;
+}

@@ -1,0 +1,224 @@
+/* ==========================================
+   暗色模式
+   ========================================== */
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* 背景色 */
+    --bg-primary: #000000;
+    --bg-secondary: #1C1C1E;
+    --bg-tertiary: #2C2C2E;
+    --bg-elevated: #3A3A3C;
+    
+    /* 文字颜色 */
+    --text-primary: #FFFFFF;
+    --text-secondary: rgba(235, 235, 245, 0.6);
+    --text-tertiary: rgba(235, 235, 245, 0.3);
+    --text-quaternary: rgba(235, 235, 245, 0.18);
+    
+    /* 主色调（暗色版本） */
+    --ios-blue: #0A84FF;
+    --ios-blue-light: #64D2FF;
+    --ios-blue-dark: #0040DD;
+    
+    /* 分类颜色（暗色版本） */
+    --category-work: #0A84FF;
+    --category-life: #30D158;
+    --category-study: #FF9F0A;
+    --category-health: #FF453A;
+    
+    /* 功能色 */
+    --success: #30D158;
+    --warning: #FF9F0A;
+    --error: #FF453A;
+    
+    /* 阴影（加深） */
+    --shadow-small: 0 1px 3px rgba(0, 0, 0, 0.3);
+    --shadow-medium: 0 2px 8px rgba(0, 0, 0, 0.4);
+    --shadow-large: 0 4px 16px rgba(0, 0, 0, 0.5);
+  }
+  
+  /* 导航栏 */
+  .navbar {
+    background: rgba(28, 28, 30, 0.7);
+    border-bottom-color: rgba(84, 84, 88, 0.65);
+  }
+  
+  /* 底部栏 */
+  .bottom-bar {
+    background: rgba(28, 28, 30, 0.7);
+    border-top-color: rgba(84, 84, 88, 0.65);
+  }
+  
+  /* 任务卡片 */
+  .task-card {
+    background: var(--bg-secondary);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  /* 搜索框 */
+  .search-input {
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+  }
+  
+  /* 分类按钮 */
+  .category-btn {
+    background: var(--bg-secondary);
+    border-color: rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+  }
+  
+  .category-btn.active {
+    background: var(--ios-blue);
+    border-color: var(--ios-blue);
+  }
+  
+  /* 输入框 */
+  .input-field {
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+  }
+  
+  .input-field:focus {
+    background: var(--bg-elevated);
+  }
+  
+  /* 分类选择按钮 */
+  .category-select-btn {
+    background: var(--bg-tertiary);
+  }
+  
+  .category-select-btn.active {
+    background: rgba(10, 132, 255, 0.15);
+    border-color: var(--ios-blue);
+  }
+  
+  /* 模态框 */
+  .modal-overlay {
+    background: rgba(0, 0, 0, 0.7);
+  }
+  
+  .modal-content {
+    background: var(--bg-secondary);
+  }
+  
+  .modal-divider {
+    background: rgba(255, 255, 255, 0.1);
+  }
+  
+  /* Toast */
+  .toast {
+    background: rgba(50, 50, 50, 0.95);
+  }
+  
+  /* FAB 按钮在暗色模式下更亮 */
+  .fab-button {
+    box-shadow: 0 4px 12px rgba(10, 132, 255, 0.5);
+  }
+}
+
+/* 手动暗色模式切换 */
+body.dark-mode {
+  /* 背景色 */
+  --bg-primary: #000000;
+  --bg-secondary: #1C1C1E;
+  --bg-tertiary: #2C2C2E;
+  --bg-elevated: #3A3A3C;
+  
+  /* 文字颜色 */
+  --text-primary: #FFFFFF;
+  --text-secondary: rgba(235, 235, 245, 0.6);
+  --text-tertiary: rgba(235, 235, 245, 0.3);
+  --text-quaternary: rgba(235, 235, 245, 0.18);
+  
+  /* 主色调 */
+  --ios-blue: #0A84FF;
+  --ios-blue-light: #64D2FF;
+  --ios-blue-dark: #0040DD;
+  
+  /* 分类颜色 */
+  --category-work: #0A84FF;
+  --category-life: #30D158;
+  --category-study: #FF9F0A;
+  --category-health: #FF453A;
+  
+  /* 功能色 */
+  --success: #30D158;
+  --warning: #FF9F0A;
+  --error: #FF453A;
+  
+  /* 阴影 */
+  --shadow-small: 0 1px 3px rgba(0, 0, 0, 0.3);
+  --shadow-medium: 0 2px 8px rgba(0, 0, 0, 0.4);
+  --shadow-large: 0 4px 16px rgba(0, 0, 0, 0.5);
+}
+
+body.dark-mode .navbar {
+  background: rgba(28, 28, 30, 0.7);
+  border-bottom-color: rgba(84, 84, 88, 0.65);
+}
+
+body.dark-mode .bottom-bar {
+  background: rgba(28, 28, 30, 0.7);
+  border-top-color: rgba(84, 84, 88, 0.65);
+}
+
+body.dark-mode .task-card {
+  background: var(--bg-secondary);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode .search-input {
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+}
+
+body.dark-mode .category-btn {
+  background: var(--bg-secondary);
+  border-color: rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
+}
+
+body.dark-mode .category-btn.active {
+  background: var(--ios-blue);
+  border-color: var(--ios-blue);
+}
+
+body.dark-mode .input-field {
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+}
+
+body.dark-mode .input-field:focus {
+  background: var(--bg-elevated);
+}
+
+body.dark-mode .category-select-btn {
+  background: var(--bg-tertiary);
+}
+
+body.dark-mode .category-select-btn.active {
+  background: rgba(10, 132, 255, 0.15);
+  border-color: var(--ios-blue);
+}
+
+body.dark-mode .modal-overlay {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+body.dark-mode .modal-content {
+  background: var(--bg-secondary);
+}
+
+body.dark-mode .modal-divider {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode .toast {
+  background: rgba(50, 50, 50, 0.95);
+}
+
+body.dark-mode .fab-button {
+  box-shadow: 0 4px 12px rgba(10, 132, 255, 0.5);
+}

@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "name": "wucuotuo",
+  "buildCommand": null,
+  "devCommand": null,
+  "installCommand": null,
+  "framework": null,
+  "outputDirectory": ".",
+  "public": true
+}
